@@ -33,7 +33,7 @@ module safe(
     always @(posedge clk) begin
         assign is_pressed = row1 | row2 | row3 | row4 | col1 | col2 | col3;
         assign is_on = col3 & row4 & ~reset & ~is_pressed;
-        assign is_star_pressed = col3 & row4 & ~ispressed;
+        assign is_star_pressed = col3 & row4 & ~is_pressed;
         assign digit_count_clk = is_on & is_pressed;
         assign cs[0] = _cs[0] & is_pressed;
         assign cs[1] = _cs[1] & is_pressed;
