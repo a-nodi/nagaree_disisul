@@ -94,10 +94,10 @@ module Comparator(
     input input_digit_count[2:0],
     input clk, // Clock
     input cs[5:0],
-    input wr, // ºñ¹Ğ¹øÈ£ Àç¼³Á¤ (reset)
+    input wr, // ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ç¼³ï¿½ï¿½ (reset)
     input compare, // is_star_pressed
-    input reset, // input buffer ÃÊ±âÈ­
-    input initialize, // answer buffer ÃÊ±âÈ­
+    input reset, // input buffer ï¿½Ê±ï¿½È­
+    input initialize, // answer buffer ï¿½Ê±ï¿½È­
     output reg correct
 );
     
@@ -112,19 +112,19 @@ module Comparator(
         correct = 1'b0;
     end
     
-    always @(posedge wr) begin // wr 1 ÀÌ¸é ºñ¹ø ÀúÀå
+    always @(posedge wr) begin // wr 1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         assign answer_digit_count[0] = input_digit_count[0];
         assign answer_digit_count[1] = input_digit_count[1];
         assign answer_digit_count[2] = input_digit_count[2];        
     end
     
     always @(posedge compare) begin // compare
-        assign correct = _correct;
+        assign correct = _correct & (input_digit_count[0] ~^ answer_digit_count[0]) & (input_digit_count[1] ~^ answer_digit_count[1]) & (input_digit_count[2] ~^ answer_digit_count[2]);
         assign _reset = 1; 
     end
     
     always @(negedge compare) begin
-        assign correct = _correct;
+        assign correct = _correct & (input_digit_count[0] ~^ answer_digit_count[0]) & (input_digit_count[1] ~^ answer_digit_count[1]) & (input_digit_count[2] ~^ answer_digit_count[2]);
         assign _reset = 0;
     end
     
