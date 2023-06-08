@@ -14,11 +14,11 @@ module StateManager(
     end
 
     always @(posedge clk) begin
-        assign _input[4] = is_on;
-        assign _input[3] = is_star_pressed;
-        assign _input[2] = reset;
-        assign _input[1] = correct;
-        assign _input[0] = initialize;
+        _input[4] <= is_on;
+        _input[3] <= is_star_pressed;
+        _input[2] <= reset;
+        _input[1] <= correct;
+        _input[0] <= initialize;
 
         // State = 000
         if (_input === 5'bxxxx1) begin
