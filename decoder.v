@@ -1,4 +1,4 @@
-/* CSED273 FInal project */
+/* CSED273 Final project */
 
 `timescale 1ns / 1ps
 
@@ -15,7 +15,8 @@ module Decoder(
     :input en: enable
     :output wire [5:0] out: 
     
-    Initialization not needed
+    No initialization needed
+    Synchronous module
     */
     
     and(out[0], ~cnt[2], ~cnt[1], cnt[0], en);
